@@ -1,9 +1,7 @@
-var isBrowser = true;
 // require exists in NodeJs
 if (typeof require === 'function')
 {
   var jsigs = require('../jsigs');
-  isBrowser = false;
 }
 
 var matcher = {
@@ -44,12 +42,7 @@ function enquote(str) {
 describe('Negative testing means more coverage.', function() {
 
   beforeEach(function() {
-    if (isBrowser) {
-      // Testem uses jasmine 1 from CDN
-      this.addMatchers(matcher);
-    } else {
-      jasmine.addMatchers(matcher);
-    }
+    jasmine.addMatchers(matcher);
   });
 
   it ('sig NULL', function() {

@@ -72,7 +72,17 @@ if (typeCode === jsigs.CODES.OBJECT) {
   doWork(options);
 }
 ```
+### isTypeCode
 
+Returns a boolean if the typecode provided matches the value.
+
+```javascript
+// Usage
+var options = {};
+if (jsigs.isTypeCode(options, jsigs.CODES.OBJECT)) {
+  doWork(options);
+}
+```
 
 ## Technology
 

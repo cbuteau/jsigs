@@ -67,6 +67,7 @@
       return TYPECODES.OBJECT;
     }
 
+    /* istanbul ignore next */
     return TYPECODES.UNMAPPED;
   };
 
@@ -355,6 +356,10 @@ function throwIfErrors(errorList) {
   jsigs.isTypeCode = function(value, typecode) {
     var computed = getTypeCode(value);
     return computed === typecode;
+  };
+
+  jsigs.typeCodeToString = function(typeCode) {
+    return typeCodeToString(typeCode);
   };
 
   jsigs.validateFunction = function(functionObject, paramCount) {

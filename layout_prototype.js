@@ -19,6 +19,10 @@
     return computed === typecode;
   };
 
+  jsigs.typeCodeToString = function(typeCode) {
+    return typeCodeToString(typeCode);
+  };
+
   jsigs.validateFunction = function(functionObject, paramCount) {
     var computed = getTypeCode(functionObject);
     return (computed === TYPECODES.FUNCTION) && (functionObject.length === paramCount);

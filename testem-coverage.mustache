@@ -3,22 +3,6 @@
 <head>
 <title>My Test Page</title>
 <link rel="stylesheet" href="/node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
-<!--
-<script src="//cdnjs.cloudflare.com/ajax/libs/jasmine/1.3.1/jasmine.js"></script>
-<script src="/testem.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jasmine/1.3.1/jasmine-html.js"></script>
-<script>
-  (function() {
-    var jasmineEnv = jasmine.getEnv()
-    jasmineEnv.addReporter(new jasmine.HtmlReporter)
-
-    window.onload = function() {
-      jasmineEnv.execute()
-    };
-  })();
-</script>
--->
-
 <script src="/node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
 <script src="/node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
 <script src="/node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
@@ -38,14 +22,15 @@
     });
 </script>
 <script src="/instrument/jsigs.js"></script>
+{{#serve_files}}
+<script src="{{src}}"></script>
+{{/serve_files}}
+{{#src_files}}
+<script src="{{src}}"></script>
+{{/src_files}}
+<!--
 <script src="tests/basic.js"></script>
-<script src="tests/istypecodes.js"></script>
-<script src="tests/merge.js"></script>
-<script src="tests/negative.js"></script>
-<script src="tests/nested.js"></script>
-<script src="tests/validate.js"></script>
-<script src="tests/validateArray.js"></script>
-<script src="tests/validateFunction.js"></script>
+-->
 <!--
 <script src="/instrumented/hello_tests.js"></script>
 -->

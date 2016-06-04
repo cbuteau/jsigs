@@ -28,6 +28,7 @@
       return TYPECODES.OBJECT;
     }
 
+    /* istanbul ignore next */
     return TYPECODES.UNMAPPED;
   };
 

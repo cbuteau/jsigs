@@ -1,7 +1,7 @@
-framework: jasmine
+framework: jasmine2
 launch_in_dev:
 - Chrome
 - FireFox
 src_files:
-- 'instrument/jsigs.js'
+- 'jsigs.js'
 - 'tests/*.js'

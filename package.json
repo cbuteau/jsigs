@@ -11,14 +11,17 @@
     "handlebars": "4.0.5",
     "istanbul": "0.4.3",
     "jasmine": "2.4.1",
+    "shelljs": "0.7.0",
     "testem": "1.8.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/testem",
+    "test.old": "./node_modules/.bin/testem",
+    "test":"node ./node_modules/testem/testem.js dev",
+    "setupdev":"rm testem.js && cp testem.dev.yml testem.yml",
+    "setupcov":"rm testem.yml && cp testem.coverage.js testem.js",
     "jas": "./node_modules/.bin/jasmine",
     "gen": "node handlebars.js",
-    "cover": "./node_modules/.bin/istanbul cover --config .istanbul.yml ./node_modules/testem/testem.js ci",
-    "skank": "node ./node_modules/testem/testem.js ci"
+    "cover": "node ./node_modules/testem/testem.js ci"
   },
   "repository": {
     "type": "git",

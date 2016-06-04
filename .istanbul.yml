@@ -5,7 +5,7 @@ instrumentation:
   embed-source: true
   preserve-comments: true
   save-baseline: true
-  baseline-file: ./coverage/coverage-baeline.json
+  baseline-file: ./coverage/coverage-baseline.json
 reporting:
   print: summary
   reports:

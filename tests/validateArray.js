@@ -190,4 +190,11 @@ describe('Cover validateArray...', function() {
 
   });
 
+  describe('Negative...', function() {
+    it ('String not array', function() {
+      var list = 'A bunch of characters';
+      expect(jsigs.validateArray(list, jsigs.CODES.STRING)).toBe(false);
+    });
+  });
+
 });

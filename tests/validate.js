@@ -1,9 +1,7 @@
-var isBrowser = true;
 // require exists in NodeJs
 if (typeof require === 'function')
 {
   var jsigs = require('../jsigs');
-  isBrowser = false;
 }
 
 
@@ -46,12 +44,7 @@ var matcher = {
 describe('validate...', function() {
 
   beforeEach(function() {
-    if (isBrowser) {
-      // Testem uses jasmine 1 from CDN
-      this.addMatchers(matcher);
-    } else {
-      jasmine.addMatchers(matcher);
-    }
+    jasmine.addMatchers(matcher);
   });
 
 
@@ -133,4 +126,32 @@ describe('validate...', function() {
     }).toThrowContains('Signature is null or undefined');
 
   });
+
+  it ('NULL obj', function() {
+    var signature = {
+      fieldOne: true,
+      fieldTwo: 10,
+      fieldThree: 3.14,
+      fieldFour: /* istanbul ignore next */ function () {},
+      fieldFive: /* istanbul ignore next */ function(data){},
+      fieldSix: /* istanbul ignore next */ function(params, options) {},
+      fieldSeven: /* istanbul ignore next */ function(params, options, suboptions) {},
+    };
+
+    var obj3 = {
+      fieldOne: undefined,
+      fieldTwo: 0,
+      fieldThree: 21.9,
+      fieldFour: /* istanbul ignore next */ function() {},
+      fieldFive: /* istanbul ignore next */ function(data){},
+      fieldSix: /* istanbul ignore next */ function(params, options) {},
+      fieldSeven: /* istanbul ignore next */ function(params, options, suboptions) {},
+    };
+
+    expect( function() {
+        jsigs.validate(null, signature);
+    }).toThrowContains('Object is null or undefined');
+
+  });
+
 });
