@@ -1,0 +1,24 @@
+{
+  "name": "jsigs",
+  "version": "1.0.0",
+  "description": "A type evalution library.",
+  "main": "jsigs.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "testem",
+    "handle":"node handlebars.js",
+  },
+  "keywords": [
+    "type"
+  ],
+  "author": "Christopher W Buteau <cbuteau@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "4.0.5",
+    "jasmine": "2.4.1",
+    "mustache": "2.2.1",
+    "testem": "1.7.4"
+  }
+}
