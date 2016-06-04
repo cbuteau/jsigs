@@ -56,6 +56,24 @@ jsigs.validate = function(object, signature) {}
 jsigs.mergeAndReturn = function(object, defaults) {}
 ```
 
+### CODES
+
+An enum or lookup of all the int values that represent the basic types in Javascript.  This is because an int compare is one of the fastest hardware operation.
+
+### getTypeCode
+
+Returns a typecode that will match one of the code in jsig.CODES.
+
+```javascript
+// Usage
+var options = {};
+var typeCode = jsigs.getTypeCode(options);
+if (typeCode === jsigs.CODES.OBJECT) {
+  doWork(options);
+}
+```
+
+
 ## Technology
 
 I used the following packages...
@@ -66,3 +84,11 @@ I used the following packages...
 * [Atom](https://atom.io/) for code editing.
 
 I program on a Windows 10 box so if you find a bug specific to platform I will try to enlist you.
+
+## TODO
+
+* Minimize with version jsigs.1.0.0.min.js
+
+* GET handlebars to inject matchers code in multiple files.
+
+* Get testem runnign with istanbul [linky](https://github.com/testem/testem/tree/master/examples/coverage_istanbul)

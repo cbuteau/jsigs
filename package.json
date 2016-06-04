@@ -1,24 +1,36 @@
 {
   "name": "jsigs",
   "version": "1.0.0",
-  "description": "A type evalution library.",
+  "description": "A type evaluation library.",
   "main": "jsigs.js",
   "directories": {
     "test": "tests"
   },
+  "dependencies": {},
+  "devDependencies": {
+    "handlebars": "4.0.5",
+    "istanbul": "0.4.3",
+    "jasmine": "2.4.1",
+    "testem": "1.8.1"
+  },
   "scripts": {
-    "test": "testem",
-    "handle":"node handlebars.js",
+    "test": "./node_modules/.bin/testem",
+    "jas": "./node_modules/.bin/jasmine",
+    "gen": "node handlebars.js",
+    "cover": "./node_modules/.bin/istanbul cover --config .istanbul.yml ./node_modules/testem/testem.js ci",
+    "skank": "node ./node_modules/testem/testem.js ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cbuteau/jsigs.git"
   },
   "keywords": [
     "type"
   ],
   "author": "Christopher W Buteau <cbuteau@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "handlebars": "4.0.5",
-    "jasmine": "2.4.1",
-    "mustache": "2.2.1",
-    "testem": "1.7.4"
-  }
+  "bugs": {
+    "url": "https://github.com/cbuteau/jsigs/issues"
+  },
+  "homepage": "https://github.com/cbuteau/jsigs#readme"
 }

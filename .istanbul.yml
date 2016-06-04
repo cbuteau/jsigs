@@ -1,0 +1,18 @@
+verbose: true
+instrumentation:
+  extensions:
+    - .js
+  embed-source: true
+  preserve-comments: true
+  save-baseline: true
+  baseline-file: ./coverage/coverage-baeline.json
+reporting:
+  print: summary
+  reports:
+      - lcov
+  dir: ./coverage
+  watermarks:
+    statements: [50,70]
+    lines: [50,70]
+    functions: [50,90]
+    branches: [50,80]

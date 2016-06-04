@@ -1,10 +1,9 @@
-
 var isBrowser = true;
 // require exists in NodeJs
 if (typeof require === 'function')
 {
-  isBrowser = false;
   var jsigs = require('../jsigs');
+  isBrowser = false;
 }
 
 var matcher = {
@@ -46,40 +45,11 @@ describe('Negative testing means more coverage.', function() {
 
   beforeEach(function() {
     if (isBrowser) {
+      // Testem uses jasmine 1 from CDN
       this.addMatchers(matcher);
     } else {
       jasmine.addMatchers(matcher);
     }
-    /*
-    jasmine.addMatchers({
-      toThrowContains: function() {
-        return {
-          compare: function(actual, expected) {
-            var exception;
-
-            try {
-              actual();
-            } catch (e) {
-              exception = e;
-            }
-
-            if (exception) {
-              var msg = exception.message;
-
-              if (msg.indexOf(expected) !== -1) {
-                result.pass = true;
-              } else {
-                result.pass = false;
-                result.message = enquote(msg) + ' did not contain ' + enquote(expected);
-              }
-            }
-
-            return result;
-          }
-        };
-      }
-    });
-    */
   });
 
   it ('sig NULL', function() {

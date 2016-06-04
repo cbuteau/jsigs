@@ -3,5 +3,5 @@ launch_in_dev:
 - Chrome
 - FireFox
 src_files:
-- 'jsigs.js'
+- 'instrument/jsigs.js'
 - 'tests/*.js'

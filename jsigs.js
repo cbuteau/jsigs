@@ -72,31 +72,31 @@
 
   function typeCodeToString(typeCode) {
     /* istanbul ignore else */
-    if (typecodes.STRING === typeCode) {
+    if (TYPECODES.STRING === typeCode) {
       return 'String';
     }
-    else if (typecodes.OBJECT === typeCode) {
+    else if (TYPECODES.OBJECT === typeCode) {
       return 'Object';
     }
-    else if (typecodes.UNDEFINED === typeCode) {
+    else if (TYPECODES.UNDEFINED === typeCode) {
       return 'Undefined';
     }
-    else if (typecodes.NULL === typeCode) {
+    else if (TYPECODES.NULL === typeCode) {
       return 'NULL';
     }
-    else if (typecodes.NUMBER === typeCode) {
+    else if (TYPECODES.NUMBER === typeCode) {
       return 'Number';
     }
-    else if (typecodes.BOOLEAN === typeCode) {
+    else if (TYPECODES.BOOLEAN === typeCode) {
       return 'Boolean';
     }
-    else if (typecodes.FUNCTION === typeCode) {
+    else if (TYPECODES.FUNCTION === typeCode) {
       return 'Function';
     }
-    else if (typecodes.DATE === typeCode) {
+    else if (TYPECODES.DATE === typeCode) {
       return 'Date';
     }
-    else if (typecodes.ARRAY === typeCode) {
+    else if (TYPECODES.ARRAY === typeCode) {
       return 'Array';
     }
   }

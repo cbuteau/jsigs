@@ -5,7 +5,7 @@ if (typeof require === 'function')
   var jsigs = require('../jsigs');
 }
 
-describe('A basic set of tests...', function() {
+describe('getTypeCode...', function() {
   it ('Function', function() {
     var code = jsigs.getTypeCode(function() {});
     expect(code).toBe(jsigs.CODES.FUNCTION);
