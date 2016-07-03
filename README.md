@@ -66,6 +66,21 @@ jsigs.mergeAndReturn = function(object, defaults) {}
 
 An enum or lookup of all the int values that represent the basic types in Javascript.  This is because an int compare is one of the fastest hardware operation.
 
+```javascript
+jsigs.CODES = {
+  BOOLEAN: 0,
+  NUMBER: 1,
+  STRING: 2,
+  FUNCTION: 3,
+  OBJECT: 4,
+  UNDEFINED: 5,
+  NULL: 6,
+  DATE: 7,
+  ARRAY: 8  
+}
+```
+
+
 ### getTypeCode
 
 Returns a typecode that will match one of the code in jsig.CODES.
