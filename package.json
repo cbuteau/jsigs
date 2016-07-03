@@ -6,7 +6,9 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
+  "dependencies": {
+    "phantomjs": "2.1.7"
+  },
   "devDependencies": {
     "grunt": "1.0.1",
     "grunt-cli": "1.2.0",
