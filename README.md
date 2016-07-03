@@ -47,6 +47,8 @@ jsigs.getTypeCode = function(value) {}
 
 jsigs.isTypeCode = function(value, typeCode) {}
 
+jsigs.typeCodeToString = function(typeCode) {}
+
 jsigs.validateFunction = function(value, parameterCount) {}
 
 jsigs.validateArray = function(array, typeCode) {}
@@ -84,6 +86,51 @@ if (jsigs.isTypeCode(options, jsigs.CODES.OBJECT)) {
 }
 ```
 
+### typeCodeToString
+
+Converts an integer typecode into a string.
+
+```javascript
+// Usage
+function exposedApiCall(options) {
+  var typeCode = jsigs.getTypeCode(options);
+  if (typeCode !== jsgigs.CODES.OBJECT) {
+    throw new Error('I need an ' + jsigs.typeCodeToString(jsigs.CODES.OBJECT) + ' and you passed me a ' + jsigs.typeCodeToString(typeCode));
+  }
+}
+```
+
+### validateFunction
+
+Returns a boolean if the value passed is a function and if the parameter counts match.
+
+```javascript
+// Usage
+function specialFunction(parameters) {
+  if (parameters.onComplete  && jsigs.validateFunction(parameters.onComplete, 2)) {
+    var result = doWork();
+    parameters.onComplete(0, result);
+  }
+}
+```
+
+### validateArray
+
+Returns a boolean (True if successful; False otherwise) if the value passsed in is a list and all its members are the typeCode parameter passed in.
+
+```javascript
+// Usage
+function doSomethingCrazy(parameters) {
+  if (jsigs.validateArray(parameters,jsigs.CODES.STRING)) {
+    processStrings(parameters);
+  }
+}
+```
+
+### validate
+
+### mergeAndReturn
+
 ## Technology
 
 I used the following packages...
@@ -102,3 +149,9 @@ I program on a Windows 10 box so if you find a bug specific to platform I will t
 * GET handlebars to inject matchers code in multiple files.
 
 * Get testem runnign with istanbul [linky](https://github.com/testem/testem/tree/master/examples/coverage_istanbul)
+[issue linky](https://github.com/testem/testem/issues/229)
+
+* Try to get node coverage and combine them.
+[linky](https://github.com/gotwarlost/istanbul/issues/97)
+
+*

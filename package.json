@@ -8,20 +8,27 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "grunt": "1.0.1",
+    "grunt-cli": "1.2.0",
+    "grunt-contrib-handlebars": "1.0.0",
+    "gulp": "3.9.1",
     "handlebars": "4.0.5",
     "istanbul": "0.4.3",
     "jasmine": "2.4.1",
     "shelljs": "0.7.0",
-    "testem": "1.8.1"
+    "testem": "1.8.1",
+    "uglify-js": "2.6.2"
   },
   "scripts": {
     "test.old": "./node_modules/.bin/testem",
-    "test":"node ./node_modules/testem/testem.js dev",
-    "setupdev":"rm testem.js && cp testem.dev.yml testem.yml",
-    "setupcov":"rm testem.yml && cp testem.coverage.js testem.js",
+    "test": "node ./node_modules/testem/testem.js dev",
+    "test.ci": "node ./node_modules/testem/testem.js ci",
+    "setupdev": "rm testem.js && cp testem.dev.yml testem.yml",
+    "setupcov": "rm testem.yml && cp testem.coverage.js testem.js",
     "jas": "./node_modules/.bin/jasmine",
     "gen": "node handlebars.js",
-    "cover": "node ./node_modules/testem/testem.js ci"
+    "cover": "node ./node_modules/testem/testem.js ci",
+    "min": "node minify.js"
   },
   "repository": {
     "type": "git",

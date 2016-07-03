@@ -46,7 +46,7 @@ module.exports = {
       server = http.createServer(function(req, res) {
         console.error('... Received coverage of', req.headers['content-length'], 'length');
         // need separate files per browser/client
-        req.pipe(fs.createWriteStream(path.join(__dirname, 'coverage', 'coverage.json'))); // + Math.random() + '.json')));
+        req.pipe(fs.createWriteStream(path.join(__dirname, 'coverage_web', 'coverage.json'))); // + Math.random() + '.json')));
         // make sure we've got it all
         req.on('end', res.end.bind(res));
       }).listen(port, function(serverErr) {
