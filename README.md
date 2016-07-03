@@ -5,6 +5,10 @@
 
 Travis
 
+[![Build Status](https://travis-ci.org/cbuteau/jsigs.svg?branch=master)](https://travis-ci.org/cbuteau/jsigs)
+
+
+
 npm
 
 Coveralls?? we need to get istanbul running with testem.
