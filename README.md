@@ -15,6 +15,8 @@ Coveralls?? we need to get istanbul running with testem.
 
 npm big badge
 
+[![NPM](https://nodei.co/npm/jsigs.png)](https://nodei.co/npm/jsigs/)
+
 ## Concept
 
 Coming from a strongly typed language I wanted to learn and know the typing in javascript.  So I wrote the code to interpret it and made it available.
