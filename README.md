@@ -9,7 +9,9 @@ Travis
 
 
 
-npm
+npm Version
+
+[![npm version](http://img.shields.io/npm/v/jsigs.svg?style=flat)](https://npmjs.org/package/jsigs "View this project on npm")
 
 Coveralls?? we need to get istanbul running with testem.
 
@@ -62,6 +64,8 @@ jsigs.validateArray = function(array, typeCode) {}
 jsigs.validate = function(object, signature) {}
 
 jsigs.mergeAndReturn = function(object, defaults) {}
+
+jsigs.validateListData = function(list, childSig) {}
 ```
 
 ### CODES
@@ -150,7 +154,82 @@ function doSomethingCrazy(parameters) {
 
 ### validate
 
+Throws an exception if the object passed does not match the signature object passed.
+
+```javascript
+// Usage
+function doWorkWithComplexOptions(params, options) {
+  // this throws if options does not have these 3 members with their types.
+  jsigs.validate(options, {
+    log: false,
+    nesting: 10,
+    context: 'A string'
+  });
+
+  if (options.log) {
+    console.log('Options passed', options);
+  }
+}
+```
+
 ### mergeAndReturn
+
+Returns the original object if the signature matches or merges in the defaults provided in the signature.
+
+```javascript
+
+function doWork(parameters, options) {
+  var defaults = {
+    verbose: false,
+    onComplete: function(e) {}
+  };
+
+  var finalOpts = jsgis.mergeAndReturn(options, defaults);
+  // finalOpts will have the orignal value for verbose passed in
+  // and the default empty callback function
+
+  if (finalOpts.verbose) {
+    console.log('options to use', finalOpts);
+  }
+
+  finalOpts.onComplete(10);
+}
+
+doWork({ one:1, two:2, three: 3}, {
+  verbose: true,
+});
+
+```
+
+### validateListData
+
+Returns a boolean indicating if all the data in the array matches the child signature passed.
+
+```javascript
+// Usage
+
+var array = [
+  { important: true, value: 3.14, name: 'Little PI' },
+  { important: true, value: 2.718, name: 'Euler\'s Number' },
+  { important: true, value: 299792458, name: 'Speed of Light' },
+  { important: false, value: 115, name: 'Days until my birthday' },
+];
+
+var childSig = {
+  important: false, // boolean
+  value: 10, // NUMBER
+  name: 'A name' //STRING
+}
+
+if (jsigs.validateList(array, childSig)) {
+  array.forEach(function((item) {
+    console.log(item.name);
+    console.log('Important? ' + item.important);
+    console.log('Times 2', item.value * 2);
+  });
+}
+
+```
 
 ## Technology
 
@@ -166,8 +245,6 @@ I program on a Windows 10 box so if you find a bug specific to platform I will t
 ## TODO
 
 * Minimize with version jsigs.1.0.0.min.js
-
-* GET handlebars to inject matchers code in multiple files.
 
 * Get testem runnign with istanbul [linky](https://github.com/testem/testem/tree/master/examples/coverage_istanbul)
 [issue linky](https://github.com/testem/testem/issues/229)

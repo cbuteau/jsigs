@@ -1,14 +1,12 @@
 {
   "name": "jsigs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A type evaluation library.",
   "main": "jsigs.js",
   "directories": {
     "test": "tests"
   },
-  "dependencies": {
-    "phantomjs": "2.1.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "1.0.1",
     "grunt-cli": "1.2.0",
@@ -22,7 +20,6 @@
     "uglify-js": "2.6.2"
   },
   "scripts": {
-    "test.old": "./node_modules/.bin/testem",
     "test": "node ./node_modules/testem/testem.js dev",
     "test.ci": "node ./node_modules/testem/testem.js ci",
     "setupdev": "rm testem.js && cp testem.dev.yml testem.yml",

@@ -296,3 +296,32 @@ function throwIfErrors(errorList) {
     throw new Error(fullString);
   }
 }
+
+function validateListData(list, childSig) {
+  if (isNullOrUndefined(list) || isNullOrUndefined(childSig)) {
+    throw Error('What makes you think you don\'t pass parameters');
+  }
+
+  var type = getTypeCode(childSig);
+  var errors = [];
+  var matchCount = 0;
+
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    if (type === TYPECODES.OBJECT) {
+      errors = [];
+      validateObjectProperties('root', item, childSig, errors, {});
+      if (errors.length === 0) {
+        matchCount++;
+      }
+    } else {
+      var itemtype = getTypeCode(item);
+      if (itemtype === type) {
+        matchCount++;
+      }
+    }
+  }
+
+  return matchCount === list.length;
+}

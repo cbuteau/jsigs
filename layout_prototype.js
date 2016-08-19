@@ -69,3 +69,7 @@
       return mergeObjects(obj, sig);
     }
   }
+
+  jsigs.validateListData = function(list, childSig) {
+    return validateListData(list, childSig);
+  }
