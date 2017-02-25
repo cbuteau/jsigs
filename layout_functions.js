@@ -1,3 +1,31 @@
+'use strict';
+
+  function detectComplexObject(object) {
+    var count = 0;
+    var parent = object.__proto__;
+
+    while (parent !== null) {
+      count++;
+      parent = parent.__proto__;
+    }
+
+    // Base inline object {} seems to have one parent.
+    return count > 1;
+  }
+
+  function iterate(array, callback) {
+    if (getTypeCode(array) === TYPECODES.ARRAY) {
+      var len = array.length;
+      for (var i = 0; i < len; i++) {
+        var item = array[i];
+        callback(item, i);
+      }
+    } else {
+      console.error('Not an array to iterate');
+    }
+  }
+
+
   function getTypeCode(value) {
     // Simple tests and then duck typign to disern the value.
     if (value === undefined) {
@@ -25,6 +53,12 @@
       return TYPECODES.ARRAY;
     }
     if (value.isPrototypeOf && value.hasOwnProperty && value.toString) {
+      if (value instanceof RegExp) {
+        return TYPECODES.REGEX;
+      }
+      if (detectComplexObject(value)) {
+          return TYPECODES.COMPLEX;
+      }
       return TYPECODES.OBJECT;
     }
 
@@ -33,35 +67,120 @@
   };
 
   function typeCodeToString(typeCode) {
-    /* istanbul ignore else */
-    if (TYPECODES.STRING === typeCode) {
-      return 'String';
-    }
-    else if (TYPECODES.OBJECT === typeCode) {
-      return 'Object';
-    }
-    else if (TYPECODES.UNDEFINED === typeCode) {
-      return 'Undefined';
-    }
-    else if (TYPECODES.NULL === typeCode) {
-      return 'NULL';
-    }
-    else if (TYPECODES.NUMBER === typeCode) {
-      return 'Number';
-    }
-    else if (TYPECODES.BOOLEAN === typeCode) {
-      return 'Boolean';
-    }
-    else if (TYPECODES.FUNCTION === typeCode) {
-      return 'Function';
-    }
-    else if (TYPECODES.DATE === typeCode) {
-      return 'Date';
-    }
-    else if (TYPECODES.ARRAY === typeCode) {
-      return 'Array';
+    // switch is supposedly faster.
+    switch (typeCode) {
+      case TYPECODES.STRING:
+        return STRINGS.STRING;// 'String';
+        break;
+      case TYPECODES.OBJECT:
+        return STRINGS.OBJECT; // 'Object';
+        break;
+      case TYPECODES.UNDEFINED:
+        return STRINGS.UNDEFINED; //'Undefined';
+        break;
+      case TYPECODES.NULL:
+        return STRINGS.NULL; //'NULL';
+        break;
+      case TYPECODES.NUMBER:
+        return STRINGS.NUMBER; // 'NUmber';
+        break;
+      case TYPECODES.BOOLEAN:
+        return STRINGS.BOOLEAN; // 'Boolean';
+        break;
+      case TYPECODES.FUNCTION:
+        return STRINGS.FUNCTION; // 'Function';
+        break;
+      case TYPECODES.DATE:
+        return STRINGS.DATE; // 'Date';
+        break;
+      case TYPECODES.ARRAY:
+        return STRINGS.ARRAY; // 'Array';
+        break;
+      case TYPECODES.COMPLEX:
+        return STRINGS.COMPLEX; //'Complex';
+        break;
+      case TYPECODES.REGEX:
+        return STRINGS.REGEX; // 'Regex';
+        break;
+      default:
+        //TODO: return custom typecodes.
+        return 'Unmapped typecode';
+        break;
     }
   }
+
+  function getDefaultFromTypeCode(typeCode) {
+    switch (typeCode) {
+      case TYPECODES.BOOLEAN:
+        return DEFAULTS.BOOLEAN;
+        break;
+      case TYPECODES.NUMBER:
+        return DEFAULTS.NUMBER;
+        break;
+      case TYPECODES.STRING:
+        return DEFAULTS.STRING;
+        break;
+      case TYPECODES.FUNCTION:
+        return DEFAULTS.FUNCTION;
+        break;
+      case TYPECODES.OBJECT:
+        return DEFAULTS.OBJECT;
+        break;
+      case TYPECODES.UNDEFINED:
+        return DEFAULTS.UNDEFINED;
+        break;
+      case TYPECODES.NULL:
+        return DEFAULTS.NULL;
+        break;
+      case TYPECODES.DATE:
+        return DEFAULTS.DATE;
+        break;
+      case TYPECODES.ARRAY:
+        return DEFAULTS.ARRAY;
+        break;
+      case TYPECODES.COMPLEX:
+        return DEFAULTS.COMPLEX;
+        break;
+      case TYPECODES.REGEX:
+        return DEFAULTS.REGEX;
+        break;
+    }
+  }
+
+  // function typeCodeToString(typeCode) {
+  //   /* istanbul ignore else */
+  //   if (TYPECODES.STRING === typeCode) {
+  //     return 'String';
+  //   }
+  //   else if (TYPECODES.OBJECT === typeCode) {
+  //     return 'Object';
+  //   }
+  //   else if (TYPECODES.UNDEFINED === typeCode) {
+  //     return 'Undefined';
+  //   }
+  //   else if (TYPECODES.NULL === typeCode) {
+  //     return 'NULL';
+  //   }
+  //   else if (TYPECODES.NUMBER === typeCode) {
+  //     return 'Number';
+  //   }
+  //   else if (TYPECODES.BOOLEAN === typeCode) {
+  //     return 'Boolean';
+  //   }
+  //   else if (TYPECODES.FUNCTION === typeCode) {
+  //     return 'Function';
+  //   }
+  //   else if (TYPECODES.DATE === typeCode) {
+  //     return 'Date';
+  //   }
+  //   else if (TYPECODES.ARRAY === typeCode) {
+  //     return 'Array';
+  //   }
+  //   else if (TYPECODES.COMPLEX === typeCode) {
+  //     return 'Complex';
+  //   }
+  //   else if (TYPECODES.REGEX === typeCode) {}
+  // }
 
 
   function formatTypeOf(name, propObj, propSig, typeObj, typeSig) {
@@ -324,4 +443,33 @@ function validateListData(list, childSig) {
   }
 
   return matchCount === list.length;
+}
+
+function recursiveDump(object, array, prefix) {
+  var hasPrefix = prefix !== undefined;
+  var keys = Object.keys(object);
+  var len = keys.length;
+  for (var i = 0; i < len; i++) {
+    var key = keys[i];
+    var item = object[key];
+    var typeCode = getTypeCode(item);
+    if ((typeCode === TYPECODES.OBJECT) || (typeCode === TYPECODES.COMPLEX)) {
+      // maybe just prepend key name in this format...
+      // callbacks->
+      // so it would come out ...
+      // fieldOne,
+      // fieldTwo,
+      // callbacks->onConnect
+      // create new array and feed to list.
+      recursiveDump(item, array, key);
+    } else {
+      var str = typeCodeToString(typeCode);
+      if (hasPrefix) {
+        str = prefix + '->' + str;
+      }
+      array.push(str);
+      console.log(str);
+    }
+  }
+
 }

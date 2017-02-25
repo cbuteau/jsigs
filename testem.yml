@@ -2,8 +2,6 @@ framework: jasmine2
 launch_in_dev:
 - Chrome
 - FireFox
-launch_in_ci:
-- PhantomJS
 src_files:
 - 'jsigs.js'
 - 'tests/*.js'
