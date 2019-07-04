@@ -26,6 +26,15 @@ describe('Defaults...', function() {
 
 
   it ('Iterate strings', function() {
+    var list = [ 'So the', 'other day', 'I was cleaning my belly button', 'and', 'I', 'found', 'youth'];
+    var childSig = jsigs.DEFAULTS.STRING;
+    var concat = '';
+
+    jsigs.iterateIfValid(list, childSig, function(item) {
+      concat = concat + item + ' ';
+    });
+
+    expect(concat).toBe('So the other day I was cleaning my belly button and I found youth ');
 
   });
 

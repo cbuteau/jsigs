@@ -12,6 +12,20 @@
 
   jsigs.DEFAULTS = DEFAULTS;
 
+  jsigs.prototype = {
+    getTypeCode: function(value) {
+      return getTypeCode(value);
+    },
+    isTypeCode: function(value, typecode) {
+      var computed = getTypeCode(value);
+      return computed === typecode;
+    },
+    typeCodeToString: function(typecode) {
+      return typeCodeToString(typecode);
+    }
+  }
+
+
   jsigs.getTypeCode = function(value) {
     return getTypeCode(value);
   };

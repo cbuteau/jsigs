@@ -66,6 +66,9 @@ jsigs.validate = function(object, signature) {}
 jsigs.mergeAndReturn = function(object, defaults) {}
 
 jsigs.validateListData = function(list, childSig) {}
+
+jsigs.interateIfValid= function(list, childSig, callback) {}
+
 ```
 
 ### CODES
@@ -228,8 +231,37 @@ if (jsigs.validateList(array, childSig)) {
     console.log('Times 2', item.value * 2);
   });
 }
-
 ```
+
+### iterateIfValid
+
+Loops over the child items if they all obey the same signature.
+
+```javascript
+// Usage
+var array = [
+  { important: true, value: 3.14, name: 'Little PI' },
+  { important: true, value: 2.718, name: 'Euler\'s Number' },
+  { important: true, value: 299792458, name: 'Speed of Light' },
+  { important: false, value: 115, name: 'Days until my birthday' },
+];
+
+var childSig = {
+  important: false, // boolean
+  value: 10, // NUMBER
+  name: 'A name' //STRING
+}
+
+jsigs.iterateIfValid(array, childSig, function(item) {
+  console.log(item.name);
+  console.log('Important? ' + item.important);
+  console.log('Times 2', item.value * 2);  
+});
+```
+
+
+
+
 
 ## Technology
 
@@ -246,6 +278,10 @@ I program on a Windows 10 box so if you find a bug specific to platform I will t
 
 * Minimize with version jsigs.1.0.0.min.js
 
+[ ] - COMPLEX should use a common derive mechanism to test.
+
+* [linky](https://helpdesk.qnap.com/index.php?/Tickets/Survey/Index/AFH-932-89894/q7l00u0hkmje)
+
 * Get testem runnign with istanbul [linky](https://github.com/testem/testem/tree/master/examples/coverage_istanbul)
 [issue linky](https://github.com/testem/testem/issues/229)
 
@@ -253,3 +289,10 @@ I program on a Windows 10 box so if you find a bug specific to platform I will t
 [linky](https://github.com/gotwarlost/istanbul/issues/97)
 
 *
+
+### 6/10/2019
+
+New plan integrate typecodes and expose the functions on jsigs and use internally.
+
+### 6/12/2019
+Need to analyze all of jsigs and see if there is anything else to break out.
