@@ -28,7 +28,6 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-requirejs": "1.1.0",
     "phantomjs": "2.1.7",
-    "shelljs": "0.7.0",
     "testem": "1.8.1",
     "uglify-js": "2.6.2"
   },
